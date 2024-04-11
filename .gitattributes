@@ -1,2 +1,51 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Speed</title>
+    <script>
+        function checkSpeed(speed) {
+            if (speed < 70) {
+                return "Ok";
+            }
+
+            let demeritPoints = Math.floor((speed - 70) / 5);
+            if (demeritPoints > 12) {
+                return "License suspended";
+            }
+
+            return `Points: ${demeritPoints}`;
+        }
+
+        function updateResult(newSpeed) {
+            const input = document.getElementById('speed');
+            const result = document.getElementById('result');
+
+            input.value = newSpeed;
+            result.textContent = checkSpeed(newSpeed);
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1em;
+            gap: 1em;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <input type="number" id="speed" placeholder="Enter speed" required onchange="updateResult(this.value);">
+        <button type="button" onclick="updateResult(speed.value);">Check Speed</button>
+    </form>
+    <div id="result"></div>
+</body>
+</html>
